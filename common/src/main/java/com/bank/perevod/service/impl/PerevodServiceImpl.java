@@ -1,11 +1,11 @@
 package com.bank.perevod.service.impl;
 
+import com.bank.perevod.exception.ServiceException;
 import com.bank.perevod.dao.BankPerevodDao;
 import com.bank.perevod.dao.factory.DaoFactory;
-import com.bank.perevod.dao.impl.SQLBankPerevod;
 import com.bank.perevod.domain.to.Perevod;
 import com.bank.perevod.exception.DaoException;
-import com.bank.perevod.exception.ServiceException;
+
 
 import java.util.ArrayList;
 

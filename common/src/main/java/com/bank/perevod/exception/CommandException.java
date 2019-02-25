@@ -1,4 +1,4 @@
-package com.bank.perevod.controller.command;
+package com.bank.perevod.exception;
 
 public class CommandException extends Exception {
     private static final long serialVersionUID = 1L;

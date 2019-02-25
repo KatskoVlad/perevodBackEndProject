@@ -20,6 +20,6 @@ public interface UserService extends GenericServiceInterface<User, List<User>> {
      */
     User authorization(String login, String password) throws ServiceException;
 
-    User registration(User user) throws ServiceException, DaoException;
+    void registration(User user) throws ServiceException, DaoException;
 }
 

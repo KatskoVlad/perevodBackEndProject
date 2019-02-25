@@ -8,16 +8,14 @@ import com.bank.perevod.exception.NoSuchEntityException;
 import com.bank.perevod.exception.ServiceException;
 import com.bank.perevod.service.validator.LoginValidator;
 import com.bank.perevod.service.validator.ValidatorInterface;
-import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private static final String MESSAGE_WRONG_LOGIN = "Incorrect login!";
-    private static final String MESSAGE_WRONG_PASSWORD= "Incorrect password!";
-    private static final String MESSAGE_WRONG_NAME= "Incorrect name!";
-    private static final String MESSAGE_WRONG_USER= "Incorrect user!";
+    private static final String MESSAGE_WRONG_LOGIN = "Не корректный логин!";
+    private static final String MESSAGE_WRONG_PASSWORD= "Не верно введен пароль!";
+    private static final String MESSAGE_WRONG_USER= "Клиент не существует!";
 
     private static final DaoFactory factory = DaoFactory.getDaoFactory();
     private static final ValidatorInterface<User> VALIDATE = LoginValidator.getInstance();
@@ -34,12 +32,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User loadById(Integer userId) throws ServiceException, NoSuchEntityException {
+    public User loadById(Integer userId) throws SecurityException, NoSuchEntityException {
         return null;
     }
 
     @Override
-    public User registration(User user) throws ServiceException, DaoException {
+    public void registration(User user) throws DaoException, ServiceException {
         if (user.getLogin() == null || user.getLogin().isEmpty()) {
             throw new ServiceException(MESSAGE_WRONG_LOGIN);
         }
@@ -50,15 +48,15 @@ public class UserServiceImpl implements UserService {
         UserDao userDao = daoObjectFactory.getUserDao();
         int i = 0;
         try {
+            userDao.checkUser(user.getLogin(), user.getPassword());
             i = userDao.create(user);
         } catch (DaoException e) {
-            throw new ServiceException(e.getMessage());
+            throw e;
         }
-        return userDao.checkUserById(i);
     }
 
     @Override
-    public User authorization(String login, String password) throws ServiceException, NoSuchEntityException {
+    public User authorization(String login, String password) throws NoSuchEntityException, ServiceException {
         try {
             if (login==null||login.isEmpty()){
                 throw new ServiceException(MESSAGE_WRONG_LOGIN);
@@ -71,19 +69,17 @@ public class UserServiceImpl implements UserService {
 
                 boolean check = userDao.checkUser(login, password);
                 if (!check) {
-//                    throw new NoSuchEntityException("Error!!! No surch User");
                     throw new ServiceException(MESSAGE_WRONG_USER);
-
                 } else {
                     return userDao.getUserNode(login, password);
                 }
         } catch (DaoException e) {
-            throw new ServiceException("Service Exception", e);
+            throw new ServiceException("Не верно введен, пользователь или пароль", e);
         }
     }
 
     @Override
-    public User create(User obj) throws ServiceException {
+    public User create(User obj) throws SecurityException {
         throw new UnsatisfiedLinkError();
     }
 

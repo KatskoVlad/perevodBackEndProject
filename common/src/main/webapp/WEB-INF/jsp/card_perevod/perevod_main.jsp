@@ -54,7 +54,7 @@
             </section>
         </div>
         <div class="rem-col-gap rem-col-gap-direction">
-            <svg class="ico-card-direction" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32.5px" height="58.5px"></svg>
+            <svg class="ico-card-direction" xmlns="http://www.w3.org/2000/svg" width="32.5px" height="58.5px"></svg>
         </div>
         <div class="rem-col">
             <div class="card-title">Получатель</div>

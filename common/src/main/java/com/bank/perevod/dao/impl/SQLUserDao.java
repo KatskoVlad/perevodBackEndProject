@@ -7,11 +7,12 @@ import com.bank.perevod.domain.to.User;
 import com.bank.perevod.exception.DaoException;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -44,6 +45,7 @@ public class SQLUserDao implements UserDao {
     private static final String EMAIL = "email";
     private static final String LAST_ID = "lastId";
     private static final ConnectionPool pool = ConnectionPool.getInstance();
+    private static final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
     public SQLUserDao() {
         super();
     }
@@ -102,10 +104,13 @@ public class SQLUserDao implements UserDao {
             statement.setString(1, login);
             statement.setString(2, password);
             ResultSet set = statement.executeQuery();
-
-            return set.next();
+            boolean userFound = set.next();
+            if (!userFound){
+                throw new DaoException("Вы не зарегистрированы! Зарегистрируйтесь!");
+            }
+            return userFound;
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception", e);
+            throw new DaoException("Exception SQL, connect DataBase", e);
         }
     }
     @Override
@@ -205,7 +210,7 @@ public class SQLUserDao implements UserDao {
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getName());
-            statement.setString(4, "2018-01-01");
+            statement.setString(4, timeStamp);
             statement.setBoolean(5, user.isBloked());
             statement.setInt(6, user.getIdRole());
             statement.setString(7,  user.getSex());

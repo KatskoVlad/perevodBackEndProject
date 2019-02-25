@@ -1,10 +1,8 @@
 package com.bank.perevod.controller.command.impl;
 
-import com.bank.perevod.controller.command.CommandException;
 import com.bank.perevod.controller.command.CommandInterface;
 import com.bank.perevod.domain.to.User;
 import com.bank.perevod.exception.ServiceException;
-import com.bank.perevod.exception.ValidationException;
 import com.bank.perevod.service.PagePath;
 import com.bank.perevod.service.impl.UserService;
 import com.bank.perevod.service.impl.UserServiceImpl;
@@ -54,7 +52,7 @@ public class LoginCommand implements CommandInterface {
      * @throws CommandException if authorization method process fail
      */
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 
         PagePath page;
         try {
@@ -82,12 +80,10 @@ public class LoginCommand implements CommandInterface {
 
                 request.setAttribute(ACTION, REDIRECT_ACTION_ATTRIBUTE);
             }
-        } catch (ValidationException e) {
+        } catch (ServiceException e) {
             request.setAttribute(ERROR_FLAG, ERROR_FLAG_VALUE);
             request.setAttribute(ACTION, FORWARD_ACTION_ATTRIBUTE);
             page = PagePath.INDEX;
-        } catch (ServiceException e) {
-            throw new CommandException("Command Exception", e);
         }
 //        return null;
 //        return MANAGER.getProperty(page.toString());

@@ -8,12 +8,6 @@
     <title>Insert title here</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="css/choices.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/ie.css">
-    <link rel="stylesheet" type="text/css" href="css/min.css">
-    <link rel="stylesheet" type="text/css" href="css/pvd.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.bxslider.css">
-    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
     <link rel="stylesheet" type="text/css" href="css/theme.css">
 </head>
 <body>
@@ -36,15 +30,15 @@
                         </ul>
                         <div class="form-content tab-content">
                             <div id="tab15_1" class="tab-pane active">
-<form action="FrontController" method="post">
-    <input type="hidden" name="action" value="authorization" /> Логин:<br />
-    <input type="text" name="login" value="" /><br /> Пароль:<br />
-    <input type="password" name="password" value="" /><br />
-    <input type="submit" value="Войти" /> <br />
-    <c:if test="${not empty  requestScope.errorMessage }">
-        <script type="text/javascript" >alert("${  requestScope.errorMessage }");</script>
-    </c:if>
-</form>
+                                <form action="FrontController" method="post">
+                                    <input type="hidden" name="action" value="authorization" /> Логин:<br />
+                                    <input type="text" name="login" value="" /><br /> Пароль:<br />
+                                    <input type="password" name="password" value="" /><br />
+                                    <input type="submit" value="Войти" /> <br />
+                                    <c:if test="${not empty  requestScope.errorMessage }">
+                                        <script type="text/javascript" >alert("${  requestScope.errorMessage }");</script>
+                                    </c:if>
+                                </form>
                             </div>
                         </div>
                     </div>

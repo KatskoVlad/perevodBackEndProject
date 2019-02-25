@@ -1,5 +1,7 @@
 package com.bank.perevod.controller.command;
 
+import com.bank.perevod.exception.ServiceException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
@@ -24,10 +26,9 @@ public class TestCommand implements CommandInterface {
      * @param request  HttpServletRequest
      * @param response HttpServletResponse
      * @return the path to go to a specific page
-     * @throws CommandException when getting all nodes fail
      */
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         request.setAttribute("testList", Arrays.asList("Java", "C#", "GOLang"));
         request.setAttribute(ACTION, FORWARD_ACTION_ATTRIBUTE);
 

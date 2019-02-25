@@ -1,7 +1,6 @@
 package com.bank.perevod.controller.command.impl.user_command;
 
 import com.bank.perevod.controller.command.CommandInterface;
-import com.bank.perevod.dao.UserDao;
 import com.bank.perevod.dao.factory.ServiceFactory;
 import com.bank.perevod.domain.to.User;
 import com.bank.perevod.exception.ServiceException;
@@ -25,6 +24,7 @@ public class Authorization implements CommandInterface {
     private static final String MESSAGE_ABOUT_PROBLEM = "Sorry,technical problem";
     private static final String MAIN_JSP = "WEB-INF/jsp/card_perevod/perevod_main.jsp";
     private static final String INDEX_JSP = "index.jsp";
+    private static final String ERROR_LOGIN_JSP = "invalidLogin.jsp";
     private static final String ROLE = "role_id";
     private static final String NAME_USERS = "name";
 
@@ -39,7 +39,7 @@ public class Authorization implements CommandInterface {
         UserService userService = factory.getUserService();
 
         User user = null;
-        String page = null;
+        String page = INDEX_JSP;
         try {
             user = userService.authorization(login, password);
             if (user != null) {
@@ -50,15 +50,11 @@ public class Authorization implements CommandInterface {
                 session.setAttribute(NAME_USERS, name);
                 session.setAttribute(ROLE, role_id);
                 session.setAttribute(LOGIN, login);
-                request.setAttribute(USER, user);
-                page = MAIN_JSP;
-            } else {
-                request.setAttribute(ERROR_MESSAGE, MESSAGE_WRONG_INFO);
+                //request.setAttribute(USER, user);
                 page = INDEX_JSP;
-
             }
         } catch (ServiceException e) {
-            request.setAttribute(ERROR_MESSAGE, MESSAGE_ABOUT_PROBLEM);
+            request.setAttribute(ERROR_MESSAGE, e.getMessage());
             page = INDEX_JSP;
         }
 

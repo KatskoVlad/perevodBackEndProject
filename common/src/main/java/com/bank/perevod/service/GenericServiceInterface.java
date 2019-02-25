@@ -2,8 +2,6 @@ package com.bank.perevod.service;
 
 import com.bank.perevod.exception.ServiceException;
 
-import java.util.List;
-
 /*
  * Basic Service interface with template parameters.
  * @param <TO> generic type of objects passed to methods and can be returned

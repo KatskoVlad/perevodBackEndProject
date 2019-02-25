@@ -1,7 +1,5 @@
 package com.bank.perevod.dao.impl;
 
-import com.bank.perevod.dao.CatalogBanksDao;
-
 public class SQLCatalogBanks {
 
     private static final String SELECT_ALL_BANKS = "SELECT * FROM catalog_banks";

@@ -5,15 +5,8 @@ import com.bank.perevod.dao.UserDao;
 import com.bank.perevod.dao.connection_pool.ConnectionPool;
 import com.bank.perevod.dao.connection_pool.ConnectionPoolException;
 import com.bank.perevod.dao.factory.DaoFactory;
-import com.bank.perevod.dao.impl.SQLRoleDao;
-import com.bank.perevod.domain.to.Role;
-import com.bank.perevod.domain.to.User;
 import com.bank.perevod.exception.DaoException;
-import com.bank.perevod.exception.ServiceException;
 import com.bank.perevod.service.impl.UserServiceImpl;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Main {
     private static final DaoFactory factory = DaoFactory.getDaoFactory();

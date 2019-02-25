@@ -5,9 +5,6 @@ import com.bank.perevod.dao.BankPerevodDao;
 import com.bank.perevod.dao.CatalogBanksDao;
 import com.bank.perevod.dao.RoleDao;
 import com.bank.perevod.dao.UserDao;
-import com.bank.perevod.dao.impl.SQLAccountDao;
-import com.bank.perevod.dao.impl.SQLBankPerevod;
-import com.bank.perevod.dao.impl.SQLCatalogBanks;
 import com.bank.perevod.dao.impl.SQLRoleDao;
 import com.bank.perevod.dao.impl.SQLUserDao;
 

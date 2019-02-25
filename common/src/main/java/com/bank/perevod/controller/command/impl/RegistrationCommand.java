@@ -1,9 +1,8 @@
 package com.bank.perevod.controller.command.impl;
 
-import com.bank.perevod.controller.command.CommandException;
 import com.bank.perevod.controller.command.CommandInterface;
 import com.bank.perevod.domain.to.User;
-import com.bank.perevod.exception.ValidationException;
+import com.bank.perevod.exception.ServiceException;
 import com.bank.perevod.service.impl.UserService;
 import com.bank.perevod.service.impl.UserServiceImpl;
 
@@ -57,7 +56,7 @@ public class RegistrationCommand implements CommandInterface {
      * @throws CommandException when creating fail
      */
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException {
 
         try {
             String idAccount = request.getParameter(ACCOUNT_ID);
@@ -85,11 +84,9 @@ public class RegistrationCommand implements CommandInterface {
                 session.setAttribute(USER_ROLE, resultUser);
                 request.setAttribute(ACTION, REDIRECT_ACTION_ATTRIBUTE);
             }
-        } catch (ValidationException e) {
+        } catch (ServiceException e) {
             request.setAttribute(ERROR_FLAG, ERROR_FLAG_VALUE);
             request.setAttribute(ACTION, FORWARD_ACTION_ATTRIBUTE);
-        } catch (Exception e) {
-            throw new CommandException("Command Exception", e);
         }
     }
 }

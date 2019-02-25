@@ -7,11 +7,11 @@ import com.bank.perevod.service.validator.LoginValidator;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
-import java.io.IOException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 
 public class LoginServlet extends HttpServlet {
@@ -22,21 +22,17 @@ public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try
-        {
+        try {
             User user = new User();
             LoginValidator loginValidator = new LoginValidator();
             UserDao userDao = factory.getUserDao();
             user = userDao.getUserNode(request.getParameter("login"), request.getParameter("password"));
 
-            if (loginValidator.isValid(user))
-            {
-
+            if (loginValidator.isValid(user)) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser",user);
                 response.sendRedirect("userLogged.jsp"); //logged-in page
             }
-
             else
                 response.sendRedirect("invalidLogin.jsp"); //error page
         }

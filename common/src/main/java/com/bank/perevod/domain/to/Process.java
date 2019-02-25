@@ -1,6 +1,5 @@
 package com.bank.perevod.domain.to;
 
-import java.sql.Date;
 import java.util.Objects;
 
 public class Process {

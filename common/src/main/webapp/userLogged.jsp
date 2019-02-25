@@ -5,8 +5,8 @@
   Time: 13:41
   To change this template use File | Settings | File Templates.
 --%>
-<%@page import="java.io.FileReader"%>
 <%@page import="java.io.BufferedReader"%>
+<%@page import="java.io.FileReader"%>
 <%@ page language="java"
          contentType="text/html; charset=windows-1256"
          pageEncoding="windows-1256"

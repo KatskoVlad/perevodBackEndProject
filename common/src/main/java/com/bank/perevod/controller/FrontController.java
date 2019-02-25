@@ -1,16 +1,12 @@
 package com.bank.perevod.controller;
 
-import com.bank.perevod.controller.command.CommandException;
 import com.bank.perevod.controller.command.CommandHelper;
 import com.bank.perevod.controller.command.CommandInterface;
-import com.bank.perevod.dao.connection_pool.ConnectionPool;
-import com.bank.perevod.dao.connection_pool.ConnectionPoolException;
-import com.bank.perevod.exception.CanNotCreateSource;
 import com.bank.perevod.exception.DaoException;
+import com.bank.perevod.exception.ServiceException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +21,11 @@ public class FrontController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getRootLogger();
     private static final String ERROR_PAGE = "/error";
-    private static final String ACTION = "action";
+    private static final String ACTION = "command";
     private static final String REDIRECT_ATTRIBUTE = "redirect";
+    private static final String ERROR_MESSAGE = "errorMessage";
+    private static final String ERROR_JSP = "WEB-INF/jsp/error.jsp";
+    private static final String INDEX_JSP = "index.jsp";
 
 
     public FrontController() {
@@ -54,16 +53,17 @@ public class FrontController extends HttpServlet {
         String commandName=request.getParameter(ACTION);
 
         CommandHelper helper = new CommandHelper();
-
+        String page = INDEX_JSP;
         CommandInterface command = helper.getCommand(request);
         try {
             command.execute(request, response);
-        } catch (CommandException e) {
-//            e.printStackTrace();
-            throw new CanNotCreateSource(e);
-        } catch (DaoException e) {
-            e.printStackTrace();
+        } catch (DaoException | ServiceException e) {
+            request.setAttribute(ERROR_MESSAGE, e.getMessage());
+            page=ERROR_JSP;
+            RequestDispatcher dispatcher=request.getRequestDispatcher(page);
+            dispatcher.forward(request, response);
         }
+
 //        String page;
 //
 //        CommandInterface action = helper.getCommand(request);

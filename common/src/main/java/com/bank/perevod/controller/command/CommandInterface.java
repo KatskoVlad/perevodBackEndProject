@@ -1,7 +1,7 @@
 package com.bank.perevod.controller.command;
 
 import com.bank.perevod.exception.DaoException;
-import com.bank.perevod.exception.ValidationException;
+import com.bank.perevod.exception.ServiceException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,5 +22,5 @@ public interface CommandInterface {
    * @return the path to go to a specific page
    * @throws CommandException
    */
-    void execute(HttpServletRequest request, HttpServletResponse response) throws CommandException, IOException, ServletException, DaoException;
+    void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DaoException, ServiceException;
 }

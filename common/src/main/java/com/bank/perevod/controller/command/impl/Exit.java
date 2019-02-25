@@ -1,6 +1,5 @@
 package com.bank.perevod.controller.command.impl;
 
-import com.bank.perevod.controller.command.CommandException;
 import com.bank.perevod.controller.command.CommandInterface;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +12,7 @@ import java.io.IOException;
 public class Exit implements CommandInterface {
     private static final String INDEX_JSP ="index.jsp";
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws CommandException, IOException, ServletException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session=request.getSession(true);
         session.invalidate();
