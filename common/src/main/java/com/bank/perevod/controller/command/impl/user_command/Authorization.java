@@ -51,7 +51,7 @@ public class Authorization implements CommandInterface {
                 session.setAttribute(ROLE, role_id);
                 session.setAttribute(LOGIN, login);
                 //request.setAttribute(USER, user);
-                page = INDEX_JSP;
+                page = MAIN_JSP;
             }
         } catch (ServiceException e) {
             request.setAttribute(ERROR_MESSAGE, e.getMessage());
